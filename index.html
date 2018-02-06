@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Psychic-Game</title>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7"
+        crossorigin="anonymous">
+</head>
+
+<body>
+
+    <div class="jumbotron">
+        <h1 class="text-center">Psychic Game</h1>
+
+    </div>
+
+    <div class="container">
+        <h2>Guess the letter I am thinking of : </h2>
+        <h3 id="wins"> Wins : </h3>
+        <h3 id="losses"> Losses : </h3>
+        <h3 id="guessesLeft"> Guesses Left : </h3>
+        <h3 id="lettersGuessed"> Letters Guessed : </h3>
+
+    </div>
+
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script> -->
+
+    <script src="http://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
+    <script type="text/javascript">
+
+        // Get html id's in order to print
+        var wins = $("#wins");
+        var losses = $("#losses");
+        var guessesLeft = $("#guessesLeft");
+        var lettersGuessed = $("#lettersGuessed");
+
+        // Count variables
+        var winCount = 0;
+        var lossCount = 0;
+        var numGuessLeft = 5;
+        var guessesArray = [];
+
+        var letters = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"];
+        function randomLtr() {
+            var letter = letters[Math.floor(Math.random() * letters.length)];
+            return (letter);
+            // return("c")
+        }
+        wins.html("Wins: " + winCount)
+        losses.html("Losses : " + lossCount)
+        guessesLeft.html("Guesses Left : " + numGuessLeft)
+        lettersGuessed.html("Letters Guessed : " + guessesArray + " ")
+
+        var randletter = randomLtr();
+        console.log(randletter);
+
+        // var letter = letters[3];
+        var user_letter;
+        var index = 0;
+        var i;
+
+
+
+        // while (numGuessLeft > 0) {
+        // for (var i = 0; i < numGuessLeft; i++) {
+        document.onkeyup = function (event) {
+            user_letter = event.key;
+
+
+            if (user_letter === randletter) {
+                // alert("You Win!!!")
+                winCount = winCount + 1;
+                guessesArray[index] = user_letter;
+                wins.html("Wins: " + winCount)
+
+                numGuessLeft = 5;
+                guessesLeft.html("Guesses Left : " + numGuessLeft)
+                randletter = randomLtr();
+                console.log(randletter);
+                lettersGuessed.html("Letters Guessed : ");
+                // document.onkeyup = function (event) {
+                // user_letter = event.key;
+                // }        
+
+            }
+            else {
+                numGuessLeft = numGuessLeft - 1;
+                guessesArray[index] = user_letter;
+                lettersGuessed.append(user_letter)
+                lettersGuessed.append(" ")
+
+
+
+                // numGuessLeft = numGuessLeft - 1;
+                if (numGuessLeft > 0) {
+                    // alert("Try Again!")
+                    guessesLeft.html("Guesses Left : " + numGuessLeft)
+
+                    // guessesArray[index] = user_letter;
+
+
+                }
+                else {
+                    // numGuessLeft = numGuessLeft - 1;
+                    // if (numGuessLeft <= 0)
+                    // alert("You Lose")
+                   
+                    lossCount = lossCount + 1;
+                    losses.html("Losses : " + lossCount)
+                    numGuessLeft = 5;
+                    guessesLeft.html("Guesses Left : " + numGuessLeft)
+                    randletter = randomLtr();
+                    console.log(randletter);
+                    lettersGuessed.html("Letters Guessed : ");
+
+
+                }
+
+            }
+            // }
+
+            // index = index + 1;
+
+
+        }
+        // }
+    </script>
+
+
+</body>
+
+</html>
